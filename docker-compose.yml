@@ -1,0 +1,13 @@
+services:
+  tw-nhi-icc-service:
+    build: ./service
+    command: /usr/local/bin/tw-nhi-icc-service -i 0.0.0.0 -p 12345
+    ports:
+      - 12345:12345
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+  tw-nhi-icc:
+    build: ./web
+    command: npx http-server . -p 8000
+    ports:
+      -  12346:8000
