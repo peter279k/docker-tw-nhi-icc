@@ -1,6 +1,8 @@
 services:
   tw-nhi-icc-service:
-    build: ./service
+    build:
+      context: ./service
+      dockerfile: Dockerfile
     command: bash -c "pcscd && /usr/local/bin/tw-nhi-icc-service -i 0.0.0.0 -p 12345"
     devices:
       - "/dev/bus/usb:/dev/bus/usb"
@@ -9,7 +11,9 @@ services:
     volumes:
       - /dev/bus/usb:/dev/bus/usb
   tw-nhi-icc:
-    build: ./web
+    build:
+      context: ./web
+      dockerfile: Dockerfile
     command: npx http-server . -p 8000
     ports:
       -  12346:8000
